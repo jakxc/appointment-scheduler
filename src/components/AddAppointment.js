@@ -13,7 +13,7 @@ const AddAppointment = ({ onSendAppointment, lastId }) => {
   const [toggleForm, setToggleForm] = useState(false)
   const [formData, setFormData] = useState(clearData)
 
-  function formDataPublish() {
+  const formDataPublish = () => {
     const appointmentInfo = {
       id: lastId + 1,
       ownerName: formData.ownerName,
@@ -21,12 +21,12 @@ const AddAppointment = ({ onSendAppointment, lastId }) => {
       aptDate: formData.aptDate + ' ' + formData.aptTime,
       aptNotes: formData.aptNotes
     }
-    onSendAppointment(appointmentInfo);
-    setFormData(clearData);
+    onSendAppointment(appointmentInfo); //passes new info from input fields to appointment list defined in App.js
+    setFormData(clearData); //clears the fields
     setToggleForm(!toggleForm)
   }
 
-  function handleChange(event)
+  const handleChange = (event) =>
   {
     const { name, value } = event.target;
 
@@ -35,7 +35,7 @@ const AddAppointment = ({ onSendAppointment, lastId }) => {
     })
   }
 
-  function toggleVisible()
+  const toggleVisible = () =>
   {
     setToggleForm(prevToggle => !prevToggle);
   }

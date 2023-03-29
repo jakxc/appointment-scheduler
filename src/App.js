@@ -6,10 +6,12 @@ import AppointmentInfo from "./components/AppointmentInfo"
 
 function App() {
 
-  let [appointmentList, setAppointmentList] = useState([]);
-  let [query, setQuery] = useState("");
-  let [sortBy, setSortBy] = useState("petName");
-  let [orderBy, setOrderBy] = useState("asc");
+  const [appointmentList, setAppointmentList] = useState([]);
+  const [query, setQuery] = useState("");
+  const [sortBy, setSortBy] = useState("petName"); // Value appointment list is sorted by (petname, date etc)
+  const [orderBy, setOrderBy] = useState("asc"); // Asecnding or descending order
+  const [loading, setLoading] = useState(false); 
+  const [error, setError] = useState("");
 
   const filteredAppointments = appointmentList.filter(
     item => {
@@ -28,11 +30,12 @@ function App() {
   })
 
   const fetchData = useCallback(() => {
-    fetch('./data.json')
-      .then(response => response.json())
-      .then(data => {
-        setAppointmentList(data)
-      });
+    setLoading(true);
+    fetch("./data.json")
+    .then(res => res.json())
+    .then(data => setAppointmentList(data))
+    .then(() => setLoading(false))
+    .catch(err => setError(err))
   }, [])
 
   useEffect(() => {
@@ -44,10 +47,11 @@ function App() {
       <h1 className="text-5xl mb-3">
         <BiCalendar className="inline-block text-red-400 align-top" />Your Appointments</h1>
       <AddAppointment
-        onSendAppointment={myAppointment => setAppointmentList([...appointmentList, myAppointment])}
+        onSendAppointment={newAppointment => setAppointmentList([...appointmentList, newAppointment])}
         lastId={appointmentList.reduce((max, item) => Number(item.id) > max ? Number(item.id) : max, 0)}
       />
-      <Search query={query}
+      <Search 
+        query={query}
         onQueryChange={myQuery => setQuery(myQuery)}
         orderBy={orderBy}
         onOrderByChange={mySort => setOrderBy(mySort)}
@@ -55,16 +59,16 @@ function App() {
         onSortByChange={mySort => setSortBy(mySort)}
       />
 
-      <ul className="divide-y divide-gray-200">
+      {!loading && <ul className="divide-y divide-gray-200">
         {filteredAppointments.map(appointment => (
             <AppointmentInfo 
               key={appointment.id}
               appointment={appointment}
-              onDeleteAppointment={appointmentId => setAppointmentList(appointmentList.filter(appointment => appointment.id !== appointmentId))}
+              onDeleteAppointment={(appointmentId) => setAppointmentList(appointmentList.filter(appointment => appointment.id !== appointmentId))}
             />
           ))
         }
-      </ul>
+      </ul>}
     </div>
   );
 }
