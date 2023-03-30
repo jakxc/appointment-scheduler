@@ -1,7 +1,7 @@
 import { BiCalendarPlus } from "react-icons/bi";
 import { useState } from 'react';
 
-const AddAppointment = ({ onSendAppointment, lastId }) => {
+const AddAppointment = ({ addAppointment, lastId }) => {
   const clearData = {
     ownerName: '',
     petName: '',
@@ -21,7 +21,7 @@ const AddAppointment = ({ onSendAppointment, lastId }) => {
       aptDate: formData.aptDate + ' ' + formData.aptTime,
       aptNotes: formData.aptNotes
     }
-    onSendAppointment(appointmentInfo); //passes new info from input fields to appointment list defined in App.js
+    addAppointment(appointmentInfo); //passes new info from input fields to appointment list defined in App.js
     setFormData(clearData); //clears the fields
     setToggleForm(!toggleForm)
   }
