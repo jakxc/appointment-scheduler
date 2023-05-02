@@ -31,7 +31,7 @@ const AddAppointment = ({ addAppointment, lastId }) => {
     const { name, value } = event.target;
 
     setFormData(prevData => {
-      return {...prevData, [name]:value}
+      return {...prevData, [name]: value}
     })
   }
 
@@ -82,8 +82,8 @@ const AddAppointment = ({ addAppointment, lastId }) => {
 
           <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start  sm:pt-5">
             <label htmlFor="aptDate" className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
-              Apt Date
-          </label>
+              Appointment Date
+            </label>
             <div className="mt-1 sm:mt-0 sm:col-span-2">
               <input 
                 type="date" 
@@ -97,8 +97,8 @@ const AddAppointment = ({ addAppointment, lastId }) => {
 
           <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start  sm:pt-5">
             <label htmlFor="aptTime" className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
-              Apt Time
-          </label>
+              Appointment Time
+            </label>
             <div className="mt-1 sm:mt-0 sm:col-span-2">
               <input 
                 type="time" 
@@ -113,7 +113,7 @@ const AddAppointment = ({ addAppointment, lastId }) => {
           <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start  sm:pt-5">
             <label htmlFor="aptNotes" className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
               Appointment Notes
-          </label>
+            </label>
             <div className="mt-1 sm:mt-0 sm:col-span-2">
               <textarea 
                 id="aptNotes" 
@@ -129,7 +129,7 @@ const AddAppointment = ({ addAppointment, lastId }) => {
             <div className="flex justify-end">
               <button type="submit" onClick={formDataPublish} className="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-400 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-400">
                 Submit
-            </button>
+              </button>
             </div>
           </div>
         </div>
